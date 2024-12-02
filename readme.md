@@ -1,3 +1,3 @@
-Nfo over Whisper lokaal:
+Info about using Whisper locally:
 - [doc](https://pypi.org/project/openai-whisper/)
-- [alternatief model transcribe and translate](https://huggingface.co/facebook/seamless-m4t-v2-large)
+- [alternative model transcribe and translate](https://huggingface.co/facebook/seamless-m4t-v2-large)
