@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+transcribetools.egg-info/PKG-INFO
+transcribetools.egg-info/SOURCES.txt
+transcribetools.egg-info/dependency_links.txt
+transcribetools.egg-info/entry_points.txt
+transcribetools.egg-info/requires.txt
+transcribetools.egg-info/top_level.txt

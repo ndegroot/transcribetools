@@ -1,14 +1,27 @@
-[tool.poetry]
-name = "transcriptionai"
-version = "0.1.0"
-description = ""
-authors = ["Nico de Groot <ndegroot0@gmail.com>"]
+[project]
+name = "TranscribeTools"
+version = "0.3.0"
+description = "Transcribe all .mp3 soundfiles in a folder"
 readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "attrs>=24.2.0",
+    "openai-whisper>=20240930",
+    "result>=0.17.0",
+    "rich-click>=1.8.5",
+    "toml>=0.10.2",
+    "whisperx>=3.1.6",
+]
+[project.scripts]
+# commandline tool, installable
+localwhisper = "transcribetools.local_whisper:cli"
 
-[tool.poetry.dependencies]
-python = "^3.12"
-
-
+# below needed to run locally
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+]

@@ -32,3 +32,37 @@ def get_config_from_toml(filepath) -> Result:
     else:
         config = Config(**data)  # as data is flat, it's ok
         return Ok(config)
+
+
+def ask_choice(msg: str, choices) -> int:
+
+    # Print het keuzemenu
+    console.print(
+            f"[bold magenta]{msg}[/bold magenta]\n"
+            "[yellow]Kies een van de volgende opties:[/yellow]"
+    )
+    for i, choice in enumerate(choices, start=1):
+        console.print(f"{i}. {choice}")
+
+    # Vraag input van de gebruiker
+    user_input = Prompt.ask(
+        "Voer het nummer van je keuze in",
+        choices=[str(i) for i in range(1, len(choices) + 1)]
+    )
+
+    # Verwerk de keuze
+    chosen_option = choices[int(user_input) - 1]  # Converteer input naar index
+    console.print(f"[green]Je hebt gekozen voor:[/green] {chosen_option}")
+
+    return chosen_option
+
+
+def show_config(result: Result):
+    if is_err(result):
+        print(f"Exiting due to {result.err}")
+        return False
+    config = result.ok_value
+    if config:
+        print(f"Config folder path: {config.folder}")
+        print(f"Config model name: {config.model}")
+    return True
