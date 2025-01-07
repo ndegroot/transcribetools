@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: transcribetools
+Version: 0.1.0
+Summary: Add your description here
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: attrs>=24.2.0
+Requires-Dist: openai-whisper>=20240930
+Requires-Dist: result>=0.17.0
+Requires-Dist: rich-click>=1.8.5
+Requires-Dist: toml>=0.10.2
+
+# LocalWhisper
+
+## Introduction
+LocalWhisper is an open source Python application
+
+## Logbook
+using Pyton 3.12.7, openai-whisper (current version 20240930) does not support 3.13 yet
+
+## Documentation about Whisper ub the cloud and local:
+- [doc](https://pypi.org/project/openai-whisper/)
+- [alternatief model transcribe and translate](https://huggingface.co/facebook/seamless-m4t-v2-large)

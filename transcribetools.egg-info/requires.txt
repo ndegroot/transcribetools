@@ -1,0 +1,5 @@
+attrs>=24.2.0
+openai-whisper>=20240930
+result>=0.17.0
+rich-click>=1.8.5
+toml>=0.10.2

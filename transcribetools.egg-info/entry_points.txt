@@ -1,0 +1,2 @@
+[console_scripts]
+canvasrobot = local_whisper:main
