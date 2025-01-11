@@ -2,6 +2,7 @@ import toml
 from result import is_ok, is_err, Ok, Err, Result
 from attrs import define
 
+
 @define
 class Config:
     folder: str
@@ -14,6 +15,7 @@ def save_config_to_toml(filepath,
     try:
         data = {"folder": folder_name, "model": model_name}
         with open(filepath, 'w') as toml_file:
+            # noinspection PyTypeChecker
             toml.dump(data, toml_file)
     except Exception as e:
         print(f"Error saving config to TOML file: {e}")
