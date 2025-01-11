@@ -103,11 +103,10 @@ def process(config):
     global model
     config = config
     model = whisper.load_model(config.model)
-    # internal_path = pathlib.Path('data')
     soundfiles_path = Path(config.folder)
     txt_files = [file for file in soundfiles_path.glob('*') if file.suffix.lower() == '.txt']
     file_stems = [file.stem for file in txt_files]
-    # file_stem indicates mp3 has been processed already
+    # txt file_stem indicates mp3 has been processed already
     mp3_files = [file for file in soundfiles_path.glob('*') if file.suffix.lower() == '.mp3' and
                  file.stem not in file_stems]
     print(f"{len(mp3_files)} files to be processed")
@@ -130,16 +129,23 @@ def create():
     choices = ["tiny", "base", "small", "medium", "large"]
     # inx = ask_choice("Choose a model", choices)
     # model = choices[inx]
-    model = Prompt.ask("Choose a model", choices=choices)
+    model = Prompt.ask("Choose a model",
+                       choices=choices,
+                       show_default=True,
+                       default="large")
     config_name = Prompt.ask("Enter a name for the configuration file",
-                             show_default=True, default="config.toml")
+                             show_default=True,
+                             default="config.toml")
     config_path = Path(config_name)
     toml_path = config_path.with_suffix(".toml")
     while toml_path.exists():  # current dir
         result = get_config_from_toml(toml_path)
         rich.echo("[red]Already exists[/red]")
         show_config(result)
-        overwrite = Prompt.ask("Overwrite?", choices=["y", "n"], default="n", show_default=True)
+        overwrite = Prompt.ask("Overwrite?",
+                               choices=["y", "n"],
+                               default="n",
+                               show_default=True)
         if overwrite == "y":
             break
         else:
