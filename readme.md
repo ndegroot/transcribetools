@@ -15,31 +15,30 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Setup
 We use uv for managing virtual environments and package installation. Follow these steps to set up the project:
 
-On macOS and Linux:
-## Download the setup script
-curl -O https://raw.githubusercontent.com/ncdegroot/audio_transcriber/main/setup.sh
+### On macOS:
+#### Install uv
 
-# Make the script executable
-chmod +x setup.sh
+- first install brew if needed from https://github.com/Homebrew/brew/releases/latese
 
-# Run the setup script
-./setup.sh
-On Windows:
-# Download the setup script
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/yourusername/audio_transcriber/main/setup.ps1 -OutFile setup.ps1
 
-# Set execution policy to run the script
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
-# Run the setup script
+### On Windows:
+#### Download the setup script
+```Invoke-WebRequest -Uri https://gitlab.uvt.nl/tst-research/transcribetools/-/blob/main/setup.ps1?ref_type=heads -OutFile setup.ps1```
+
+#### Set execution policy to run the script
+```Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass```
+
+#### Run the setup script
 .\setup.ps1
-These scripts will:
+
+### These scripts will:
 
 Install uv if it's not already installed
-Create a virtual environment
-Activate the virtual environment
-Install all required packages
 
+### install localwhisper
+
+```brew install uv```
 
 ## Plans
 - add speaker partitioning
