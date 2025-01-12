@@ -1,6 +1,9 @@
 import toml
 from result import is_ok, is_err, Ok, Err, Result
 from attrs import define
+from rich.console import Console
+
+console = Console(width=120, force_terminal=True)
 
 
 @define
