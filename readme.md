@@ -20,8 +20,6 @@ We use uv for managing virtual environments and package installation. Follow the
 
 - first install brew if needed from https://github.com/Homebrew/brew/releases/latese
 
-
-
 ### On Windows:
 #### Download the setup script
 ```Invoke-WebRequest -Uri https://gitlab.uvt.nl/tst-research/transcribetools/-/blob/main/setup.ps1?ref_type=heads -OutFile setup.ps1```
@@ -36,9 +34,11 @@ We use uv for managing virtual environments and package installation. Follow the
 
 Install uv if it's not already installed
 
-### install localwhisper
+### Install localwhisper
 
-```brew install uv```
+```uv tool install transcribetool```
+
+Install (commandline) tools in this project. For now only `localwhisper`.
 
 ## Plans
 - add speaker partitioning
