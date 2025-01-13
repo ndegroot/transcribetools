@@ -10,7 +10,7 @@ You can choose which Whisper model is to be used
 does not support 3.13 yet.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the Apache 2.0 License - see the [LICENSE file](LICENSE-2.0.txt) for details.
 
 ## Setup
 We use uv for managing virtual environments and package installation. Follow these steps to set up the project:
