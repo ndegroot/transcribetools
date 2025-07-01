@@ -17,4 +17,4 @@ irm https://astral.sh/uv/install.ps1 | iex
 # install tool
 uv install transcribetools
 
-Write-Host "Setup complete. TranscribeTools is installed. Run by using 'uv tool localwisper'  "
+Write-Host "Setup complete. TranscribeTools is installed. Run by using 'uv tool transcribetools'  "

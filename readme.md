@@ -1,8 +1,9 @@
+swori
 # LocalWhisper
 
 ## Introduction
-TranscribeTools is an Python application which transcribes all 
-sound files in a configurable folder using a local Whisper model. 
+TranscribeTools contains an Python application LocalWhisper
+which transcribes all sound files in a configurable folder using a local Whisper model. 
 You can choose which Whisper model is to be used 
 
 ## Details
@@ -10,39 +11,49 @@ You can choose which Whisper model is to be used
 does not support 3.13 yet.
 
 ## License
-This project is licensed under the Apache 2.0 License - see the [LICENSE file](LICENSE-2.0.txt) for details.
+This project is licensed under the Apache 2.0 License - see the [LICENSE file](LICENSE) for details.
 
 ## Setup
 We use uv for managing virtual environments and package installation. Follow these steps to set up the project:
 
 ### On macOS:
 #### Install uv
-
-- first install brew if needed from https://github.com/Homebrew/brew/releases/latese
+- First install brew if needed from https://github.com/Homebrew/brew/releases/latese
 
 ### On Windows:
 #### Download the setup script
-```Invoke-WebRequest -Uri https://gitlab.uvt.nl/tst-research/transcribetools/-/blob/main/setup.ps1?ref_type=heads -OutFile setup.ps1```
+We need to install `UV` a tool to install the Python environment and to 
+install the tool. There are a few possibilities
 
-#### Set execution policy to run the script
-```Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass```
+1. Follow instructions at  [the UV website](https://docs.astral.sh/uv/getting-started/installation/#__tabbed_1_2)
 
-#### Run the setup script
-.\setup.ps1
+2. Press {Windows button} then type or paste:. 
+```powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"```
+
+3. Use `winget`
+- Open the Windows Powershell: press {Windows} button and type or paste
+```Powershell
+winget install --id=astral-sh.uv  -e
+```
 
 ### These scripts will:
 
-Install uv if it's not already installed
+Installs the `uv` tool. Check if `uv {enter}` works. [At the moment](https://github.com/astral-sh/uv/issues/10014) a reboot is needed on Windows.
+Now we can install the tools.
 
-### Install localwhisper
+### Install tools
 
-```uv tool install transcribetool```
+```uv tool install transcribetools```
 
-Install (commandline) tools in this project. For now only `localwhisper`.
+Install the (commandline) tools in this project. For now 
+it's only `transcribe_folder`.
 
 ## Plans
-- add speaker partitioning
-- use (same) models through directly from PyTorch (more control)
+- Make it a local service, running in the background
+- Investigate options to let it run on a central computer, as a service
+- Create Docker image
+- Add speaker partitioning (see TranscribeWhisperX)
+- Adjust models using PyTorch (more control)
 
 ## Documentation about Whisper on the cloud and local
 - [Courtesy of and Credits to OpenAI: Whisper.ai](https://github.com/openai/whisper/blob/main/README.md)

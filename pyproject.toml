@@ -1,9 +1,9 @@
 [project]
 name = "TranscribeTools"
-version = "0.4.5"
-description = "Transcribe all .mp3 soundfiles in a folder"
+version = "0.5.5"
+description = "Transcribe all soundfiles in a folder using Whisper"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">3.10" # see Whisper docs needs <= 3.12 but uv ignore upper bound
 dependencies = [
     "attrs>=24.2.0",
     "openai>=1.59.4",
@@ -11,12 +11,14 @@ dependencies = [
     "pymsgbox>=1.0.9",
     "result>=0.17.0",
     "rich-click>=1.8.5",
+    "soundfile>=0.13.0",
     "tiutools>=0.4.1",
     "toml>=0.10.2",
+    "transformers>=4.49.0",
 ]
 [project.scripts]
 # commandline tool, installable
-localwhisper = "transcribetools.local_whisper:cli"
+transcribefolder = "transcribetools.transcribe_folder:cli"
 
 # below needed to run locally
 [build-system]
@@ -25,6 +27,7 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
+    "deepl>=1.21.1",
     "pytest>=8.3.4",
 ]
 
