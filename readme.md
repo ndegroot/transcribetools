@@ -1,7 +1,8 @@
-swori
 # LocalWhisper
 
 ## Introduction
+TranscribeTools is an Python application which transcribes all 
+sound files in a configurable folder using a local Whisper model. 
 TranscribeTools contains an Python application LocalWhisper
 which transcribes all sound files in a configurable folder using a local Whisper model. 
 You can choose which Whisper model is to be used 
