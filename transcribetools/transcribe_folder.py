@@ -57,7 +57,7 @@ def process_file(path, args):
 
         # file_name = f"{data_file.split('.')[0]}_{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}.txt"
         # file_name = output_path
-        # Open the file in write mode
+        # Open the file in writing mode
         with open(output_path, "w") as file:
             # Write the text to the file
             file.write(text_to_save)
@@ -126,7 +126,7 @@ def translate_it(input_path: Path, translator, args):
 @click.option(
     "--configfilename",
     "-c",
-    default=Path.home() / "localwhisper.toml",
+    default=Path.home() / "transcribefolder.toml",
     help="Specify config file to use",
     # show_default=True,
     metavar="FILE",

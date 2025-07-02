@@ -47,7 +47,7 @@ Now we can install the tools.
 ```uv tool install transcribetools```
 
 Install the (commandline) tools in this project. For now 
-it's only `transcribe_folder`.
+it's only `transcribefolder`.
 
 ## Plans
 - Make it a local service, running in the background
