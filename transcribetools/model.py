@@ -17,18 +17,25 @@ class Config:
     debug: bool = False
 
 
-def save_config_to_toml(filepath,
+def save_config_to_toml(configfilepath,
                         folder: Union[str, Path] = "",
                         model_name: str = ""):
+    """
+    Save a configuration file to TOML
+    :param configfilepath: is the location of the configuration file
+    :param folder: is the folder to monitor for the soundfiles file
+    :param model_name: Which version of the Whisper model to use
+    :return:
+    """
     try:
         # let's save a clean folder path, so we can use Path() when retrieving
         data = {"folder": str(folder), "model": model_name}
-        with open(filepath, 'w') as toml_file:
+        with open(configfilepath, 'w') as toml_file:
             # noinspection PyTypeChecker
             toml.dump(data, toml_file)
     except Exception as e:
         click.secho(f"Error saving config to "
-                    f"TOML file @ {filepath}: {e}", fg='red')
+                    f"TOML file @ {configfilepath}: {e}", fg='red')
 
 
 def get_config_from_toml(filepath) -> Result:

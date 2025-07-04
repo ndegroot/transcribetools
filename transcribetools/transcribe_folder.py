@@ -16,7 +16,7 @@ import rich_click as click
 from result import Result, is_ok, is_err, Ok, Err  # noqa: F401
 import soundfile as sf
 
-from .transcribe_folder_model import (
+from .model import (
     save_config_to_toml,
     get_config_from_toml,
     show_config,
@@ -98,7 +98,7 @@ def translate_it(input_path: Path, translator, args):
 
                 # file_name = f"{data_file.split('.')[0]}_{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}.txt"
                 # file_name = output_path
-                # Open the file in write mode
+                # Open the file in writing mode
                 #
                 # existing replace
 
@@ -119,6 +119,7 @@ def translate_it(input_path: Path, translator, args):
 @click.option(
     "--debug/--no-debug",
     "-d/-n",
+    is_flag=True,
     help="Print debug messages and timing information",
     default=False,
 )
@@ -127,10 +128,10 @@ def translate_it(input_path: Path, translator, args):
     "--configfilename",
     "-c",
     default=Path.home() / "transcribefolder.toml",
-    help="Specify config file to use",
+    help="Specify config file to use, defaults to 'transcribefolder.toml' in home or user folder",
     # show_default=True,
     metavar="FILE",
-    type=click.Path(exists=True, dir_okay=False, readable=True, resolve_path=True),
+    type=click.Path(exists=False, dir_okay=False, readable=False, resolve_path=True),
     show_choices=False,
     required=False,
     # prompt="Enter new config filename or accept default",
@@ -387,7 +388,7 @@ def create():
     config_name = Prompt.ask(
         "Enter a name for the configuration file",
         show_default=True,
-        default="localwhisper.toml",
+        default="transcribefolder.toml",
     )
     config_path = Path(config_name)
     toml_path = config_path.with_suffix(".toml")

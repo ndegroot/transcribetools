@@ -1,6 +1,6 @@
 [project]
 name = "TranscribeTools"
-version = "0.5.6"
+version = "0.5.7"
 description = "Transcribe all soundfiles in a folder using Whisper"
 readme = "README.md"
 dependencies = [

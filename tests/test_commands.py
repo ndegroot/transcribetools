@@ -1,5 +1,5 @@
 from click.testing import CliRunner
-import transcribetools.local_whisper as commands
+import transcribetools.transcribe_folder as commands
 """test needs human interaction as a messagebox and filedialog are presented to the user"""
 
 
@@ -18,11 +18,11 @@ def test_config_create():
     print(f"{response=}" )
     # input='ndegroot\ntheol_credo')
     assert ": large" in result.stdout  # feedback model choice
-    assert "(localwhisper.toml)" in result.stdout
+    assert "(transcribefolder.toml)" in result.stdout
 
 
 # noinspection PyTypeChecker
-def test_config_show():
+def tst_config_show():
     runner = CliRunner()
     # t = type(run)
     # t = is <class 'rich_click.rich_command.RichCommand'>
@@ -36,7 +36,7 @@ def test_config_show():
 
 
 # noinspection PyTypeChecker
-def test_process():
+def tst_process():
     runner = CliRunner()
     # t = type(run)
     # t = is <class 'rich_click.rich_command.RichCommand'>
