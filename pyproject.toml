@@ -11,7 +11,6 @@ dependencies = [
     "result>=0.17.0",
     "rich-click>=1.8.5",
     "soundfile>=0.13.0",
-    "tiutools>=0.4.1",
     "toml>=0.10.2",
     "transformers>=4.49.0",
 ]
