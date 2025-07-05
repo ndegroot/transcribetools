@@ -360,7 +360,7 @@ def config():
 # the `config` create subcommand
 @click.command("create", help="Create new configuration file")
 def create():
-    msg = "Select folder to containing the sound files"
+    msg = "Select the folder containing the sound files"
     click.echo(msg)
     # root = tk.Tk()
     # root.focus_force()

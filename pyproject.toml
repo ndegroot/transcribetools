@@ -1,7 +1,7 @@
 [project]
 name = "TranscribeTools"
-version = "0.5.7"
-description = "Transcribe all soundfiles in a folder using Whisper"
+version = "0.5.8"
+description = "Transcribe and/ot translate all soundfiles in a folder using Whisper"
 readme = "README.md"
 dependencies = [
     "attrs>=24.2.0",
@@ -13,6 +13,8 @@ dependencies = [
     "soundfile>=0.13.0",
     "toml>=0.10.2",
     "transformers>=4.49.0",
+    "deepl>=1.21.1",
+
 ]
 [project.scripts]
 # commandline tool, installable
@@ -25,7 +27,6 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
-    "deepl>=1.21.1",
     "pytest>=8.3.4",
 ]
 
