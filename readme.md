@@ -19,7 +19,7 @@ does not support 3.13 yet.
 This project is licensed under the Apache 2.0 License - see the [LICENSE file](LICENSE) for details.
 
 ## Setup
-Before installing TranscribeTools, you need to download a package manager to install dependencies—pieces of code that the application relies on. On macOS, we will use Homebrew; on Windows, we will use uv. Then, we will install TranscribeTools.
+Before installing TranscribeTools, you need to download a package manager to install dependencies—pieces of code that the application relies on. On macOS, we will use Homebrew and uv; on Windows, we will only use uv. Then, we will install TranscribeTools.
 
 To run the following prompts, one must copy and paste the commands in the command line and press enter.
 ### Package manager
