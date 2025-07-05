@@ -27,14 +27,17 @@ To run the following prompts, one must copy and paste the commands in the comman
 -Open Windows Powershell or the Command shell
 
 -Run prompt to install uv:
+
 ```powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"```
 #### On macOS:
 -Open Terminal
 
 -Run prompt to install brew:
+
 ```/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"```
 
 -Run prompt to install uv:
+
 ```brew install uv```
 
 ### Install tools
