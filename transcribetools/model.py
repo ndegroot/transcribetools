@@ -55,7 +55,7 @@ def get_config_from_toml(filepath) -> Result:
 
 def ask_choice(msg: str, choices) -> int:
 
-    # Print het keuzemenu
+    # Print the menu
     console.print(
             f"[bold magenta]{msg}[/bold magenta]\n"
             "[yellow]Kies een van de volgende opties:[/yellow]"

@@ -2,7 +2,7 @@ from transcribetools.transcribe_folder import cli
 
 
 def main():
-    cli()
+    cli("--version" )
 
 
 if __name__ == "__main__":
