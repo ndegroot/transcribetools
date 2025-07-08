@@ -1,9 +1,10 @@
 from click.testing import CliRunner
-import transcribetools.local_whisper as commands
-"""test needs human interaction as a messagebox and filedialog are presented to the user"""
+from .transcribe_folder import cli
+
+"""below tests needs human interaction as a messagebox and filedialog are presented to the user"""
 
 
-def test_config_create():
+def tst_config_create():
     runner = CliRunner()
     # t = type(run)
     # t = is <class 'rich_click.rich_command.RichCommand'>
@@ -11,14 +12,14 @@ def test_config_create():
     # https://stackoverflow.com/questions/77845322/unexpected-warning-in-click-cli-development-with-python
     # noinspection PyTypeChecker
     # noinspection PyTypeChecker
-    result = runner.invoke(commands.cli,
+    result = runner.invoke(cli,
                            ['config', 'create'],
                            input='large\n\n')
     response = result.return_value
-    print(f"{response=}" )
+    print(f"{response=}")
     # input='ndegroot\ntheol_credo')
     assert ": large" in result.stdout  # feedback model choice
-    assert "(localwhisper.toml)" in result.stdout
+    assert "(transcribefolder.toml)" in result.stdout
 
 
 # noinspection PyTypeChecker
@@ -28,7 +29,7 @@ def test_config_show():
     # t = is <class 'rich_click.rich_command.RichCommand'>
     # next line generates warning on 'run' arg 'Expected type 'BaseCommand' but it is 'Any'
     # https://stackoverflow.com/questions/77845322/unexpected-warning-in-click-cli-development-with-python
-    result = runner.invoke(commands.cli,
+    result = runner.invoke(cli,
                            ['config', 'show'])
     # no user input
     assert result.exit_code == 0
@@ -42,11 +43,8 @@ def test_process():
     # t = is <class 'rich_click.rich_command.RichCommand'>
     # next line generates warning on 'run' arg 'Expected type 'BaseCommand' but it is 'Any'
     # https://stackoverflow.com/questions/77845322/unexpected-warning-in-click-cli-development-with-python
-    result = runner.invoke(commands.cli,
-                           ['process'])
+    result = runner.invoke(cli,
+                           ['-d','transcribe'])
     # no user input
     assert result.exit_code == 0
     assert "string" in result.stdout
-
-
-
