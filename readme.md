@@ -1,4 +1,4 @@
-# TrancribeTools
+# TranscribeTools
 
 ## Introduction
 TranscribeTools is a Python application that transcribes all sound files in a configurable folder using a local version of the Whisper model. Whisper is an automatic speech recognition system created by OpenAI, which can transcribe audio files in multiple languages and translate those languages into English.
