@@ -1,5 +1,5 @@
 from click.testing import CliRunner
-import transcribetools.transcribe_folder as commands
+from transcribetools import cli
 """test needs human interaction as a messagebox and filedialog are presented to the user"""
 
 
@@ -11,7 +11,7 @@ def test_config_create():
     # https://stackoverflow.com/questions/77845322/unexpected-warning-in-click-cli-development-with-python
     # noinspection PyTypeChecker
     # noinspection PyTypeChecker
-    result = runner.invoke(commands.cli,
+    result = runner.invoke(cli,
                            ['config', 'create'],
                            input='large\n\n')
     response = result.return_value

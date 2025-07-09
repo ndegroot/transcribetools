@@ -30,21 +30,23 @@ def test_config_show():
     # next line generates warning on 'run' arg 'Expected type 'BaseCommand' but it is 'Any'
     # https://stackoverflow.com/questions/77845322/unexpected-warning-in-click-cli-development-with-python
     result = runner.invoke(cli,
-                           ['config', 'show'])
+                           ['-d', 'config', 'show'])
     # no user input
+    print(result.stdout)
     assert result.exit_code == 0
     assert ": large" in result.stdout  # feedback model choice
 
 
 # noinspection PyTypeChecker
-def test_process():
+def test_transcribe():
     runner = CliRunner()
     # t = type(run)
     # t = is <class 'rich_click.rich_command.RichCommand'>
     # next line generates warning on 'run' arg 'Expected type 'BaseCommand' but it is 'Any'
     # https://stackoverflow.com/questions/77845322/unexpected-warning-in-click-cli-development-with-python
     result = runner.invoke(cli,
-                           ['-d','transcribe'])
+                           ['-d', 'transcribe'])
     # no user input
+    print(result.stdout)
     assert result.exit_code == 0
     assert "string" in result.stdout
