@@ -1,4 +1,5 @@
 import time
+import os
 from pathlib import Path
 
 # import tkinter as tk
@@ -40,9 +41,13 @@ model = None
 
 def process_file(path, args):
     """open file, transcribe using args and save to file"""
+    if not os.path.isfile(path):
+        click.echo(f"File {path} does not exist, skipped processing")
+        return
     output_path = path.with_suffix(".txt")
     try:
         click.echo("Start processing...")
+        # noinspection PyUnresolvedReferences
         result = model.transcribe(
             str(path),
             verbose=True,
@@ -152,20 +157,21 @@ def cli(ctx: click.Context, debug, configfilename):
     if is_err(result):
         click.echo(f"Exiting due to {result.err}")
         exit(1)
-    config = result.ok_value
-    if config:
+    config_val = result.ok_value
+    if config_val:
         # click.echo("Config")
         click.echo(f"Config filename: {config_path}")
         # click.echo(f"Folder path for soundfiles: {config.folder}")
         # click.echo(f"Transcription model name: {config.model}")
-    config.debug = debug
-    ctx.obj = config
+    config_val.debug = debug
+    ctx.obj = config_val
     # process_files(config)
 
 
 # the `cli` subcommand 'process'
 
 
+# noinspection PyShadowingNames
 @cli.command(
     "transcribe",
     help="Using current configuration, transcribe all soundfiles in the folder",
@@ -222,16 +228,20 @@ def transcribe(config, select_folder, prompt, language):
         file
         for file in soundfiles_path.glob("*")
         if file.suffix.lower()
-        in (".mp3", "mp3", ".mp4", ".mpweg", ".mpga", ".m4a", ".wav", ".webm")
+        in (".mp3", ".mp4", ".mpweg", ".mpga", ".m4a", ".wav", ".webm")
         and file.stem not in file_stems
     ]
+    if config.debug:
+        click.echo(f"{soundfiles=} in path {soundfiles_path=}")
     click.echo(f"{len(soundfiles)} files to be processed")
     duration = 0
     start = time.perf_counter()
 
     for file in soundfiles:
-        f, samplerate = sf.read(file)
-        duration += len(f) / samplerate
+        #with open(file, "r") as f:
+        #    data, samplerate = sf.read(f)
+        #    duration += len(data) / samplerate
+        #    f.close()
         click.echo(f"Processing {file}")
         args = dict()
         if language != "AUTO":
@@ -242,12 +252,13 @@ def transcribe(config, select_folder, prompt, language):
     if soundfiles:
         process_time = time.perf_counter() - start
         click.echo(
-            f"Total sound duration: {duration:.1f} seconds, \n"
+        #    f"Total sound duration: {duration:.1f} seconds, \n"
             f"processing time: {process_time:.1f} seconds, \n"
-            f"realtime factor: {(process_time / duration):.2f}"
+        #    f"realtime factor: {(process_time / duration):.2f}"
         )
 
 
+# noinspection PyShadowingNames
 @cli.command(
     "deeple_translate",
     help="Using current configuration, translate all txt/doc/docx files in the folder",
@@ -378,6 +389,7 @@ def create():
     choices = ["tiny", "base", "small", "medium", "large", "turbo"]
     # inx = ask_choice("Choose a model", choices)
     # model = choices[inx]
+    # noinspection PyShadowingNames
     model = Prompt.ask(
         "Choose a model",
         console=console,
@@ -409,6 +421,7 @@ def create():
 
 
 # the 'config' show subcommand
+# noinspection PyShadowingNames
 @click.command("show", help="Show current configuration file")
 @click.pass_obj
 def show(config):
