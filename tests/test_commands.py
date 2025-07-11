@@ -1,52 +1,60 @@
+"""some tests need human interaction as a messagebox and filedialog are presented to the user
+    test ar running from the project root folder
+"""
+import os
+import glob
+import pytest
 from click.testing import CliRunner
 from transcribetools import cli
-"""test needs human interaction as a messagebox and filedialog are presented to the user"""
 
 
-def test_config_create():
+def remove_output_files():
+    # Find all .txt files in the data directory
+    txt_files = glob.glob('data/*.txt')
+
+    # Remove each file
+    for file in txt_files:
+        os.remove(file)
+        print(f"Removed: {file}")
+
+
+
+# Function to initialize setup
+@pytest.fixture
+def transcribe_setup(request):
+    print("setup")
+    remove_output_files()
+    yield  # This yields None, which is fine for a setup/teardown fixture
+    print("teardown")
+    # remove_output_files()
+
+
+def tst_config_create():
     runner = CliRunner()
-    # t = type(run)
-    # t = is <class 'rich_click.rich_command.RichCommand'>
-    # next line generates warning on 'run' arg 'Expected type 'BaseCommand' but it is 'Any'
     # https://stackoverflow.com/questions/77845322/unexpected-warning-in-click-cli-development-with-python
-    # noinspection PyTypeChecker
-    # noinspection PyTypeChecker
     result = runner.invoke(cli,
                            ['config', 'create'],
                            input='large\n\n')
     response = result.return_value
-    print(f"{response=}" )
-    # input='ndegroot\ntheol_credo')
+    print(f"{response=}")
     assert ": large" in result.stdout  # feedback model choice
-    assert "(transcribefolder.toml)" in result.stdout
 
 
 # noinspection PyTypeChecker
-def tst_config_show():
+def test_config_show() -> None:
     runner = CliRunner()
-    # t = type(run)
-    # t = is <class 'rich_click.rich_command.RichCommand'>
-    # next line generates warning on 'run' arg 'Expected type 'BaseCommand' but it is 'Any'
-    # https://stackoverflow.com/questions/77845322/unexpected-warning-in-click-cli-development-with-python
-    result = runner.invoke(commands.cli,
-                           ['config', 'show'])
-    # no user input
+    result = runner.invoke(cli,
+                           ['--configfilename', 'tests/transcribefolder.toml', 'config', 'show'])
+    print(result.stdout)
     assert result.exit_code == 0
     assert ": large" in result.stdout  # feedback model choice
 
 
 # noinspection PyTypeChecker
-def tst_process():
+def test_process(transcribe_setup):
+    # transcribe_setup()
     runner = CliRunner()
-    # t = type(run)
-    # t = is <class 'rich_click.rich_command.RichCommand'>
-    # next line generates warning on 'run' arg 'Expected type 'BaseCommand' but it is 'Any'
-    # https://stackoverflow.com/questions/77845322/unexpected-warning-in-click-cli-development-with-python
-    result = runner.invoke(commands.cli,
-                           ['process'])
-    # no user input
+    result = runner.invoke(cli,
+                           ['--configfilename', 'tests/transcribefolder.toml', 'transcribe'])
     assert result.exit_code == 0
-    assert "string" in result.stdout
-
-
-
+    assert "saved" in result.stdout

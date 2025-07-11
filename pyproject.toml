@@ -1,6 +1,6 @@
 [project]
 name = "TranscribeTools"
-version = "0.5.8"
+version = "0.5.9"
 description = "Transcribe and/ot translate all soundfiles in a folder using Whisper"
 readme = "README.md"
 dependencies = [
@@ -15,6 +15,7 @@ dependencies = [
     "transformers>=4.49.0",
     "deepl>=1.21.1",
     "keyring>=25.6.0",
+    "static-ffmpeg>=2.13",
 ]
 [project.scripts]
 # commandline tool, installable
@@ -27,6 +28,7 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
+    "hatchling>=1.27.0",
     "pytest>=8.3.4",
 ]
 

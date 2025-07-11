@@ -17,6 +17,8 @@ import rich_click as click
 from result import Result, is_ok, is_err, Ok, Err  # noqa: F401
 import soundfile as sf
 
+import static_ffmpeg
+
 from .model import (
     save_config_to_toml,
     get_config_from_toml,
@@ -38,9 +40,13 @@ MODEL = "large"
 LOCALPATH = Path.cwd()
 model = None
 
+# ffmpeg installed on first call to add_paths(), threadsafe.
+# static_ffmpeg.add_paths()  # blocks until files are downloaded
+static_ffmpeg.add_paths(weak=True)  # to only add if ffmpeg/ffprobe not already on the path
+
 
 def process_file(path, args):
-    """open file, transcribe using args and save to file"""
+    """open the file, transcribe it using args and save to file"""
     if not os.path.isfile(path):
         click.echo(f"File {path} does not exist, skipped processing")
         return
@@ -223,7 +229,7 @@ def transcribe(config, select_folder, prompt, language):
         file for file in soundfiles_path.glob("*") if file.suffix.lower() == ".txt"
     ]
     file_stems = [file.stem for file in txt_files]
-    # a txt file_stem indicates mp3 has been processed already (skip file with nio suffix
+    # a txt file_stem indicates mp3 has been processed already (skip files with no suffix
     soundfiles = [
         file
         for file in soundfiles_path.glob("*")
@@ -238,10 +244,8 @@ def transcribe(config, select_folder, prompt, language):
     start = time.perf_counter()
 
     for file in soundfiles:
-        #with open(file, "r") as f:
-        #    data, samplerate = sf.read(f)
-        #    duration += len(data) / samplerate
-        #    f.close()
+        data, samplerate = sf.read(file)
+        duration += len(data) / samplerate
         click.echo(f"Processing {file}")
         args = dict()
         if language != "AUTO":
@@ -252,9 +256,9 @@ def transcribe(config, select_folder, prompt, language):
     if soundfiles:
         process_time = time.perf_counter() - start
         click.echo(
-        #    f"Total sound duration: {duration:.1f} seconds, \n"
+            f"Total sound duration: {duration:.1f} seconds, \n"
             f"processing time: {process_time:.1f} seconds, \n"
-        #    f"realtime factor: {(process_time / duration):.2f}"
+            f"realtime factor: {(process_time / duration):.2f}"
         )
 
 
