@@ -21,7 +21,8 @@ This project is licensed under the Apache 2.0 License - see the [LICENSE file](L
 ## Setup
 Before installing TranscribeTools, you need to download a package manager to install dependencies—pieces of code that the application relies on. On macOS, we will use Homebrew and uv; on Windows, we will only use uv. Then, we will install TranscribeTools.
 
-To run the following prompts, one must copy and paste the commands in the command line and press enter.
+To run the following prompts, one must copy and paste the commands in the command line and press enter. During the setup, it might be necessary to restart powershell after installing homebrew, uv, or transcribetools in order to be able to proceed. 
+
 ### Package manager
 #### On Windows
 -Open Windows Powershell or the Command shell
@@ -29,6 +30,7 @@ To run the following prompts, one must copy and paste the commands in the comman
 -Run prompt to install uv:
 
 ```powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"```
+
 #### On macOS:
 -Open Terminal
 
@@ -41,11 +43,14 @@ To run the following prompts, one must copy and paste the commands in the comman
 ```brew install uv```
 
 ### Install tools
+Install the (commandline) tools in this project. For now it's only `transcribefolder`.
 
 ```uv tool install transcribetools```
 
-Install the (commandline) tools in this project. For now 
-it's only `transcribefolder`.
+## Command-line usage
+-Run prompt to create a configuration file with the right folder to transcribe and the right whisper model to use.
+```transcribefolder config create```
+
 
 ## Plans
 - Make it a local service, running in the background
