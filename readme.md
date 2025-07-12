@@ -56,7 +56,15 @@ Run prompt to create a configuration file with the right folder to transcribe an
 
 ```transcribefolder config create```
 
-Run prompt to transcribe all sound files in the selected folder using the configuration file transcribefolder.toml:
+Run prompt to show the default configuration file (transcribefolder.toml):
+
+```transcribefolder config show```
+
+Run prompt to show the specified configuration file:
+ 
+```transcribefolder -c name of the config file.toml config show```
+
+Run prompt to transcribe all sound files in the selected folder using the default configuration file (transcribefolder.toml):
 
 ```transcribefolder transcribe```
 
