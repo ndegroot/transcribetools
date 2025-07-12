@@ -7,7 +7,7 @@ The model must be run locally to comply with the General Data Protection Regulat
 
 On the other hand, using TranscribeTools to run the Whisper model on your own device means that files containing personal data will not be collected. The program essentially downloads the model—released as open-source software in 2022—and uses the command line to select a folder, which it then transcribes, all locally.
 
-It works with audio files under 25 MB in the following formats: mp3, wav, (mp4, mpeg, mpga, m4a, and webm). It also allows the user to choose the model size. The larger models are more accurate but slower, and vice versa.
+It works with audio files under 25 MB in the following formats: mp3, wav, mp4, mpeg, mpga, m4a, and webm. It also allows the user to choose the model size. The larger models are more accurate but slower, and vice versa.
 
 Furthermore, the application utilizes the terminal—a text-based interface to interact with the computer—to install and use Whisper. This might sound intimidating but is hopefully manageable when following the instructions given below. The terminal is already installed in most cases.
 
