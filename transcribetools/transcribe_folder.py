@@ -16,6 +16,7 @@ from rich.prompt import Prompt
 import rich_click as click
 from result import Result, is_ok, is_err, Ok, Err  # noqa: F401
 import soundfile as sf
+from soundfile import LibsndfileError
 
 import static_ffmpeg
 
@@ -234,7 +235,7 @@ def transcribe(config, select_folder, prompt, language):
         file
         for file in soundfiles_path.glob("*")
         if file.suffix.lower()
-        in (".mp3", ".mp4", ".mpweg", ".mpga", ".m4a", ".wav", ".webm")
+        in (".mp3", ".mp4", ".mpeg", ".mpga", ".m4a", ".wav", ".webm")
         and file.stem not in file_stems
     ]
     if config.debug:
@@ -244,8 +245,13 @@ def transcribe(config, select_folder, prompt, language):
     start = time.perf_counter()
 
     for file in soundfiles:
-        data, samplerate = sf.read(file)
-        duration += len(data) / samplerate
+        try:
+            data, samplerate = sf.read(file)
+        except LibsndfileError:
+            duration = 0
+            click.echo('Duration unavailable, statistics incomplete.')
+        else:
+            duration += len(data) / samplerate
         click.echo(f"Processing {file}")
         args = dict()
         if language != "AUTO":
@@ -253,7 +259,7 @@ def transcribe(config, select_folder, prompt, language):
         if prompt:
             args["prompt"] = prompt
         process_file(file, args)
-    if soundfiles:
+    if soundfiles and duration > 0:
         process_time = time.perf_counter() - start
         click.echo(
             f"Total sound duration: {duration:.1f} seconds, \n"
