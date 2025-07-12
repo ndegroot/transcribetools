@@ -25,20 +25,20 @@ To run the following prompts, one must copy and paste the commands in the comman
 
 ### Package manager
 #### On Windows
--Open Windows Powershell or the Command shell
+Open Windows Powershell or the Command shell
 
--Run prompt to install uv:
+Run prompt to install uv:
 
 ```powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"```
 
 #### On macOS:
--Open Terminal
+Open Terminal
 
--Run prompt to install brew:
+Run prompt to install brew:
 
 ```/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"```
 
--Run prompt to install uv:
+Run prompt to install uv:
 
 ```brew install uv```
 
@@ -48,21 +48,25 @@ Install the (commandline) tools in this project. For now it's only `transcribefo
 ```uv tool install transcribetools```
 
 ## Command-line usage
--Run prompt to see the possible commands and options:
+Run prompt to see the possible commands and options:
 
 ```transcribefolder --help```
 
--Run prompt to create a configuration file with the right folder to transcribe and the right whisper model to use:
+Run prompt to create a configuration file with the right folder to transcribe and the right whisper model to use:
 
 ```transcribefolder config create```
 
--Run prompt to transcribe all sound files in the selected folder using the configuration file transcribefolder.toml:
+Run prompt to transcribe all sound files in the selected folder using the configuration file transcribefolder.toml:
 
 ```transcribefolder transcribe```
 
--Run prompt to transcribe all sound files in the selected folder using a specific configuration file:
+Run prompt to transcribe all sound files in the selected folder using a specific configuration file:
 
 ```transcribefolder -c name of the config file.toml transcribe```
+
+## Known issues 
+- The deepl_translate command is not yet working. 
+- The duration and realtime factor are not available for processed files in the formats: mp4, mpeg, mpga, m4a, and webm.
 
 ## Plans
 - Make it a local service, running in the background
