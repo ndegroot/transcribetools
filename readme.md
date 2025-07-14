@@ -49,10 +49,10 @@ Install the (commandline) tools in this project. For now it's only `transcribefo
 
 ## Command-line usage
 ### Getting started
-To get started using transcribefolder simply follow the instructions below.
+To get started using transcribefolder simply follow the instructions below:
 1. Run the prompt ```transcribefolder transcribe```
 2. Select which folder to transcribe
-3. Choose which whisper model to use
+3. Enter the name of the Whisper model you'd like to use
 4. Press enter to use the default configuration file name
 
 ### Prompt list
