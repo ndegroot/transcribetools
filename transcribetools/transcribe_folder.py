@@ -120,6 +120,54 @@ def translate_it(input_path: Path, translator, args):
 
                     click.echo(f"Text has been saved to {output_path}")
 
+def createcore():
+            msg = "Select the folder containing the sound files"
+            click.echo(msg)
+            # root = tk.Tk()
+            # root.focus_force()
+            # Cause the root window to disappear milliseconds after calling the filedialog.
+            # root.after(100, root.withdraw)
+            # tk.Tk().withdraw()
+            # hangs: mb.showinfo("msg","Select folder containing the sound files")
+            msgbox.alert(msg, "info")
+            # "title" only supported on linux ith wv ...
+            folder = askdirectory(
+                title="Select folder to monitor containing the sound files",
+                mustexist=True,
+                initialdir="~",
+            )
+            choices = ["tiny", "base", "small", "medium", "large", "turbo"]
+            # inx = ask_choice("Choose a model", choices)
+            # model = choices[inx]
+            # noinspection PyShadowingNames
+            model = Prompt.ask(
+                "Choose a model",
+                console=console,
+                choices=choices,
+                show_default=True,
+                default="large",
+            )
+            config_name = Prompt.ask(
+                "Enter a name for the configuration file",
+                show_default=True,
+                default="transcribefolder.toml",
+            )
+            config_path = Path.home() / config_name
+            toml_path = config_path.with_suffix(".toml")
+            while toml_path.exists():  # current dir
+                result = get_config_from_toml(toml_path)
+                click.secho("Already exists...", fg="red")
+                show_config(result)
+                overwrite = Prompt.ask(
+                    "Overwrite?", choices=["y", "n"], default="n", show_default=True
+                )
+                if overwrite == "y":
+                    break
+                else:
+                    return
+            # Prompt.ask("Enter model name")
+            save_config_to_toml(toml_path, folder, model)
+            click.echo(f"{toml_path} saved")
 
 @click.group(
     no_args_is_help=True,
@@ -129,8 +177,8 @@ def translate_it(input_path: Path, translator, args):
 )
 @click.version_option(package_name="transcribetools")
 @click.option(
-    "--debug/--no-debug",
-    "-d/-n",
+    "--debug",
+    "-d",
     is_flag=True,
     help="Print debug messages and timing information",
     default=False,
@@ -157,7 +205,7 @@ def cli(ctx: click.Context, debug, configfilename):
     if debug:
         click.echo(f"Config_path: {config_path}")
     if not config_path.exists():
-        save_config_to_toml(config_path, LOCALPATH, MODEL)
+        createcore()
     result = get_config_from_toml(
         config_path
     )  # has the default values (homedir, large)
@@ -381,54 +429,8 @@ def config():
 # the `config` create subcommand
 @click.command("create", help="Create new configuration file")
 def create():
-    msg = "Select the folder containing the sound files"
-    click.echo(msg)
-    # root = tk.Tk()
-    # root.focus_force()
-    # Cause the root window to disappear milliseconds after calling the filedialog.
-    # root.after(100, root.withdraw)
-    # tk.Tk().withdraw()
-    # hangs: mb.showinfo("msg","Select folder containing the sound files")
-    msgbox.alert(msg, "info")
-    # "title" only supported on linux ith wv ...
-    folder = askdirectory(
-        title="Select folder to monitor containing the sound files",
-        mustexist=True,
-        initialdir="~",
-    )
-    choices = ["tiny", "base", "small", "medium", "large", "turbo"]
-    # inx = ask_choice("Choose a model", choices)
-    # model = choices[inx]
-    # noinspection PyShadowingNames
-    model = Prompt.ask(
-        "Choose a model",
-        console=console,
-        choices=choices,
-        show_default=True,
-        default="large",
-    )
-    config_name = Prompt.ask(
-        "Enter a name for the configuration file",
-        show_default=True,
-        default="transcribefolder.toml",
-    )
-    config_path = Path(config_name)
-    toml_path = config_path.with_suffix(".toml")
-    while toml_path.exists():  # current dir
-        result = get_config_from_toml(toml_path)
-        click.secho("Already exists...", fg="red")
-        show_config(result)
-        overwrite = Prompt.ask(
-            "Overwrite?", choices=["y", "n"], default="n", show_default=True
-        )
-        if overwrite == "y":
-            break
-        else:
-            return
-    # Prompt.ask("Enter model name")
-    save_config_to_toml(toml_path, folder, model)
-    click.echo(f"{toml_path} saved")
-
+    createcore()
+    exit(0)
 
 # the 'config' show subcommand
 # noinspection PyShadowingNames
