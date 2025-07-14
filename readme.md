@@ -49,7 +49,7 @@ Install the (commandline) tools in this project. For now it's only `transcribefo
 
 ## Command-line usage
 ### Getting started
-To get started using transcribefolder simply follow the instructions below:
+To get started with transcribefolder, simply follow the instructions below. The first time you run it, a configuration file will be created with the selected folder and model, which will be used from then on. If needed, you can update the configuration by running the command: ```transcribefolder config create```  
 1. Run the prompt ```transcribefolder transcribe```
 2. Select which folder to transcribe
 3. Enter the name of the Whisper model you'd like to use
