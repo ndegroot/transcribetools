@@ -14,6 +14,7 @@ import whisper
 # import rich
 from rich.prompt import Prompt
 import rich_click as click
+import click_spinner  # local version
 from result import Result, is_ok, is_err, Ok, Err  # noqa: F401
 import soundfile as sf
 from soundfile import LibsndfileError
@@ -120,54 +121,56 @@ def translate_it(input_path: Path, translator, args):
 
                     click.echo(f"Text has been saved to {output_path}")
 
+
 def createcore():
-            msg = "Select the folder containing the sound files"
-            click.echo(msg)
-            # root = tk.Tk()
-            # root.focus_force()
-            # Cause the root window to disappear milliseconds after calling the filedialog.
-            # root.after(100, root.withdraw)
-            # tk.Tk().withdraw()
-            # hangs: mb.showinfo("msg","Select folder containing the sound files")
-            msgbox.alert(msg, "info")
-            # "title" only supported on linux ith wv ...
-            folder = askdirectory(
-                title="Select folder to monitor containing the sound files",
-                mustexist=True,
-                initialdir="~",
-            )
-            choices = ["tiny", "base", "small", "medium", "large", "turbo"]
-            # inx = ask_choice("Choose a model", choices)
-            # model = choices[inx]
-            # noinspection PyShadowingNames
-            model = Prompt.ask(
-                "Choose a model",
-                console=console,
-                choices=choices,
-                show_default=True,
-                default="large",
-            )
-            config_name = Prompt.ask(
-                "Enter a name for the configuration file",
-                show_default=True,
-                default="transcribefolder.toml",
-            )
-            config_path = Path.home() / config_name
-            toml_path = config_path.with_suffix(".toml")
-            while toml_path.exists():  # current dir
-                result = get_config_from_toml(toml_path)
-                click.secho("Already exists...", fg="red")
-                show_config(result)
-                overwrite = Prompt.ask(
-                    "Overwrite?", choices=["y", "n"], default="n", show_default=True
-                )
-                if overwrite == "y":
-                    break
-                else:
-                    return
-            # Prompt.ask("Enter model name")
-            save_config_to_toml(toml_path, folder, model)
-            click.echo(f"{toml_path} saved")
+    msg = "Select the folder containing the sound files"
+    click.echo(msg)
+    # root = tk.Tk()
+    # root.focus_force()
+    # Cause the root window to disappear milliseconds after calling the filedialog.
+    # root.after(100, root.withdraw)
+    # tk.Tk().withdraw()
+    # hangs: mb.showinfo("msg","Select folder containing the sound files")
+    msgbox.alert(msg, "info")
+    # "title" only supported on linux ith wv ...
+    folder = askdirectory(
+        title="Select folder to monitor containing the sound files",
+        mustexist=True,
+        initialdir="~",
+    )
+    choices = ["tiny", "base", "small", "medium", "large", "turbo"]
+    # inx = ask_choice("Choose a model", choices)
+    # model = choices[inx]
+    # noinspection PyShadowingNames
+    model = Prompt.ask(
+        "Choose a model",
+        console=console,
+        choices=choices,
+        show_default=True,
+        default="large",
+    )
+    config_name = Prompt.ask(
+        "Enter a name for the configuration file",
+        show_default=True,
+        default="transcribefolder.toml",
+    )
+    config_path = Path.home() / config_name
+    toml_path = config_path.with_suffix(".toml")
+    while toml_path.exists():  # current dir
+        result = get_config_from_toml(toml_path)
+        click.secho("Already exists...", fg="red")
+        show_config(result)
+        overwrite = Prompt.ask(
+            "Overwrite?", choices=["y", "n"], default="n", show_default=True
+        )
+        if overwrite == "y":
+            break
+        else:
+            return
+    # Prompt.ask("Enter model name")
+    save_config_to_toml(toml_path, folder, model)
+    click.echo(f"{toml_path} saved")
+
 
 @click.group(
     no_args_is_help=True,
@@ -259,7 +262,6 @@ def transcribe(config, select_folder, prompt, language):
     # config = config
     if config.debug:
         click.echo(f"Load model: {config.model}")
-    model = whisper.load_model(config.model)
     soundfiles_path = Path(config.folder)
     if config.debug:
         click.echo(f"Folder path for soundfiles: {soundfiles_path}")
@@ -273,19 +275,22 @@ def transcribe(config, select_folder, prompt, language):
                 initialdir="~",
             )
         )
+    click.echo(f"Loading model...")
 
-    txt_files = [
-        file for file in soundfiles_path.glob("*") if file.suffix.lower() == ".txt"
-    ]
-    file_stems = [file.stem for file in txt_files]
-    # a txt file_stem indicates mp3 has been processed already (skip files with no suffix
-    soundfiles = [
-        file
-        for file in soundfiles_path.glob("*")
-        if file.suffix.lower()
-        in (".mp3", ".mp4", ".mpeg", ".mpga", ".m4a", ".wav", ".webm")
-        and file.stem not in file_stems
-    ]
+    with click_spinner.spinner(force=True):
+        model = whisper.load_model(config.model)
+        txt_files = [
+            file for file in soundfiles_path.glob("*") if file.suffix.lower() == ".txt"
+        ]
+        file_stems = [file.stem for file in txt_files]
+        # a txt file_stem indicates mp3 has been processed already (skip files with no suffix
+        soundfiles = [
+            file
+            for file in soundfiles_path.glob("*")
+            if file.suffix.lower()
+            in (".mp3", ".mp4", ".mpeg", ".mpga", ".m4a", ".wav", ".webm")
+            and file.stem not in file_stems
+        ]
     if config.debug:
         click.echo(f"{soundfiles=} in path {soundfiles_path=}")
     click.echo(f"{len(soundfiles)} files to be processed")
@@ -403,7 +408,7 @@ def deeple_translate(config, select_folder, prompt, source_language, target_lang
         if file.suffix.lower() in (".txt", ".doc", ".docx")
         and file.stem not in file_stems
     ]
-    # candidates heave text-like suffix and no translation yet (no file in folder with target language code
+    # candidates have text-like suffix and no translation yet (no file in folder with target language code
     click.echo(f"{len(translate_file_paths)} files to be processed")
 
     for file in translate_file_paths:
@@ -431,6 +436,7 @@ def config():
 def create():
     createcore()
     exit(0)
+
 
 # the 'config' show subcommand
 # noinspection PyShadowingNames
