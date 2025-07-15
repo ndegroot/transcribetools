@@ -1,4 +1,4 @@
-from transcribetools.transcribe_folder import cli
+from transcribetools import cli
 
 
 def main():

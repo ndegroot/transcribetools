@@ -23,7 +23,7 @@ def translate_setup(text_nl="Dit is een voorbeeld tekst met een paar woorden",
                     text_en="This is a sample text with a few words"):
     # Find all .txt files in the data directory
 
-    fname = f"data/test.txt"
+    fname = "data/test.txt"
     with open(fname, 'w') as file:
         file.write(text_nl)
     yield text_en
@@ -75,7 +75,7 @@ def test_config_show() -> None:
     assert ": large" in result.stdout  # feedback model choice
 
 
-# noinspection PyTypeChecker
+# noinspection PyTypeChecker,PyUnusedLocal
 def tst_process(transcribe_setup):
     runner = CliRunner()
     result = runner.invoke(cli,
