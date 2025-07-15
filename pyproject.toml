@@ -16,6 +16,8 @@ dependencies = [
     "deepl>=1.21.1",
     "keyring>=25.6.0",
     "static-ffmpeg>=2.13",
+    "certifi==2025.7.14",
+    "docutils==0.22rc5",
 ]
 [project.scripts]
 # commandline tool, installable
