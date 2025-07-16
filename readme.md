@@ -12,7 +12,7 @@ It works with audio files under 25 MB in the following formats: mp3, wav, mp4, m
 Furthermore, the application utilizes the terminal—a text-based interface to interact with the computer—to install and use Whisper. This might sound intimidating but is hopefully manageable when following the instructions given below. The terminal is already installed in most cases.
 
 ## Details
- - using Python 3.12.7, openai-whisper https://pypi.org/project/openai-whisper/ (current version 20240930) 
+ - using Python 3.12.7, openai-whisper https://pypi.org/project/openai-whisper/ (current version 20250625,) 
 does not support 3.13 yet.
 
 ## License
