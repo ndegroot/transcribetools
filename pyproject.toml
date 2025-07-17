@@ -3,17 +3,18 @@ name = "TranscribeTools"
 version = "0.5.9"
 description = "Transcribe and/ot translate all soundfiles in a folder using Whisper"
 readme = "README.md"
+requires-python = ">= 3.12, <3.14"
 dependencies = [
-    "attrs>=24.2.0",
+    "attrs>=25.3.0",
     "openai>=1.59.4",
-    "openai-whisper>=20240930",
+    "openai-whisper>=20250625",
     "pymsgbox>=1.0.9",
     "result>=0.17.0",
     "rich-click>=1.8.5",
-    "soundfile>=0.13.0",
+    "soundfile>=0.13.1",
     "toml>=0.10.2",
-    "transformers>=4.49.0",
-    "deepl>=1.21.1",
+    "transformers>=5.53.2",
+    "deepl>=1.22.0",
     "keyring>=25.6.0",
     "static-ffmpeg>=2.13",
     "certifi==2025.7.14",
@@ -36,3 +37,7 @@ dev = [
 
 [tool.uv.sources]
 tiutools = { path = "../tiutools", editable = true }
+
+[tool.ruff]
+# Allow lines to be as long as 120.
+line-length = 120

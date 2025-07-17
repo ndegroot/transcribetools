@@ -82,6 +82,8 @@ def tst_process(transcribe_setup):
                            ['--configfilename', 'tests/transcribefolder.toml', 'transcribe'])
     assert result.exit_code == 0
     assert "saved" in result.stdout
+    # u heeft nog geen invoer gegeven of de ingevoerde gegevens zijn ongeldig toets een
+    # een als u op kunt komen of een twee als u niet kunt komen
 
 
 # noinspection PyTypeChecker
