@@ -9,7 +9,7 @@ On the other hand, using TranscribeTools to run the Whisper model on your own de
 
 It works with audio files under 25 MB in the following formats: mp3, wav, mp4, mpeg, mpga, m4a, and webm. It also allows the user to choose the model size. The larger models are more accurate but slower, while the smaller models are faster but less accurate. One exception is the turbo model, which is a optimized version of the large model that is relatively quick with a minimal decrease in accuracy. 
 
-Furthermore, the application utilizes the terminal—a text-based interface to interact with the computer—to install and use Whisper. This might sound intimidating but is hopefully manageable when following the instructions given below. The terminal is already installed in most cases.
+Furthermore, the application utilizes the terminal, a text-based interface to interact with the computer, to install and use Whisper. This might sound intimidating but is hopefully manageable when following the instructions given below. The terminal is already installed in most cases.
 
 ## Details
  - using Python 3.12.7, openai-whisper https://pypi.org/project/openai-whisper/ (current version 20250625,) 
