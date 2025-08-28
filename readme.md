@@ -21,7 +21,7 @@ This project is licensed under the Apache 2.0 License - see the [LICENSE file](L
 ## Setup
 Before installing TranscribeTools, you need to download a package manager to install dependencies—pieces of code that the application relies on. On macOS, we will use Homebrew and uv; on Windows, we will only use uv. Then, we will install TranscribeTools.
 
-To run the following prompts, one must copy and paste the commands in the command line and press enter. During the setup, it might be necessary to restart powershell after installing homebrew, uv, or transcribetools in order to be able to proceed. 
+To run the following prompts, one must copy and paste the commands in the command line and press enter. During the setup, it might be necessary to restart the terminal after installing homebrew, uv, or transcribetools in order to be able to proceed. 
 
 ### Package manager
 #### On Windows
