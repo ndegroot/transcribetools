@@ -58,7 +58,7 @@ uv tool install transcribetools
 ## Command-line usage
 ### Getting started
 To get started with transcribefolder, simply follow the instructions below. The first
-time you run it, a configuration file will be created with the selected folder and 
+time you run it, a configuration file will be created with the current folder and 
 model, which will be used from then on. If needed, you can update the configuration by 
 running the command: 
 
