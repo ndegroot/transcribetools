@@ -12,7 +12,7 @@ It works with audio files under 25 MB in the following formats: mp3, wav, mp4, m
 Furthermore, the application utilizes the terminal—a text-based interface to interact with the computer—to install and use Whisper. This might sound intimidating but is hopefully manageable when following the instructions given below. The terminal is already installed in most cases.
 
 ## Details
- - using Python 3.12.7, openai-whisper https://pypi.org/project/openai-whisper/ (current version 20240930) 
+ - using Python 3.12.7, openai-whisper https://pypi.org/project/openai-whisper/ (current version 20250625,) 
 does not support 3.13 yet.
 
 ## License
@@ -49,7 +49,13 @@ Install the (commandline) tools in this project. For now it's only `transcribefo
 
 ## Command-line usage
 ### Getting started
-To get started with transcribefolder, simply follow the instructions below. The first time you run it, a configuration file will be created with the selected folder and model, which will be used from then on. If needed, you can update the configuration by running the command: ```transcribefolder config create```  
+To get started with transcribefolder, simply follow the instructions below. The first
+time you run it, a configuration file will be created with the selected folder and 
+model, which will be used from then on. If needed, you can update the configuration by 
+running the command: 
+
+```transcribefolder config create```  
+
 1. Run the prompt ```transcribefolder transcribe```
 2. Select which folder to transcribe
 3. Enter the name of the Whisper model you'd like to use
