@@ -9,7 +9,7 @@ On the other hand, using TranscribeTools to run the Whisper model on your own de
 
 It works with audio files under 25 MB in the following formats: mp3, wav, mp4, mpeg, mpga, m4a, and webm. It also allows the user to choose the model size. The larger models are more accurate but slower, while the smaller models are faster but less accurate. One exception is the turbo model, which is a optimized version of the large model that is relatively quick with a minimal decrease in accuracy. 
 
-Furthermore, the application utilizes the terminal—a text-based interface to interact with the computer—to install and use Whisper. This might sound intimidating but is hopefully manageable when following the instructions given below. The terminal is already installed in most cases.
+Furthermore, the application utilizes the terminal, a text-based interface to interact with the computer, to install and use Whisper. This might sound intimidating but is hopefully manageable when following the instructions given below. The terminal is already installed in most cases.
 
 ## Details
  - using Python 3.12.7, openai-whisper https://pypi.org/project/openai-whisper/ (current version 20250625,) 
@@ -21,29 +21,29 @@ This project is licensed under the Apache 2.0 License - see the [LICENSE file](L
 ## Setup
 Before installing TranscribeTools, you need to download a package manager to install dependencies—pieces of code that the application relies on. On macOS, we will use Homebrew and uv; on Windows, we will only use uv. Then, we will install TranscribeTools.
 
-To run the following prompts, one must copy and paste the commands in the command line and press enter. During the setup, it might be necessary to restart powershell after installing homebrew, uv, or transcribetools in order to be able to proceed. 
+To run the following prompts, one must copy and paste the commands in the command line and press enter. During the setup, it might be necessary to restart the terminal after installing homebrew, uv, or transcribetools in order to be able to proceed. 
 
 ### Package manager
 #### On Windows
-Open Windows Powershell or the Command shell
+1. Open Windows Powershell or the Command shell
 
-Run prompt to install uv:
+2. Run prompt to install uv:
 
 ```powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"```
 
 #### On macOS:
-Open Terminal
+1. Open Terminal
 
-Run prompt to install brew:
+2. Run prompt to install brew:
 
 ```/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"```
 
-Run prompt to install uv:
+3. Run prompt to install uv:
 
 ```brew install uv```
 
 ### Install tools
-Install the (commandline) tools in this project. For now it's only `transcribefolder`:
+1. Install the (commandline) tools in this project. For now it's only `transcribefolder`:
 
 ```uv tool install transcribetools```
 
