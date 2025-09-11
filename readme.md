@@ -29,23 +29,31 @@ To run the following prompts, one must copy and paste the commands in the comman
 
 2. Run prompt to install uv:
 
-```powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"```
+```bash
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
 
 #### On macOS:
 1. Open Terminal
 
 2. Run prompt to install brew:
 
-```/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"```
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
 
 3. Run prompt to install uv:
 
-```brew install uv```
+```bash
+brew install uv
+```
 
 ### Install tools
 1. Install the (commandline) tools in this project. For now it's only `transcribefolder`:
 
-```uv tool install transcribetools```
+```bash
+uv tool install transcribetools
+```
 
 ## Command-line usage
 ### Getting started
@@ -54,9 +62,14 @@ time you run it, a configuration file will be created with the selected folder a
 model, which will be used from then on. If needed, you can update the configuration by 
 running the command: 
 
-```transcribefolder config create```  
+```bash
+transcribefolder config create
+```  
 
-1. Run the prompt ```transcribefolder transcribe```
+1. Run the prompt 
+  ```bash
+  transcribefolder transcribe
+  ```
 2. Select which folder to transcribe
 3. Enter the name of the Whisper model you'd like to use
 4. Press enter to use the default configuration file name
@@ -64,27 +77,39 @@ running the command:
 ### Prompt list
 Run prompt to see the possible commands and options:
 
-```transcribefolder --help```
+```bash
+transcribefolder --help
+```
 
 Run prompt to create a configuration file with the right folder to transcribe and the right whisper model to use:
 
-```transcribefolder config create```
+```bash
+transcribefolder config create
+```
 
 Run prompt to show the default configuration file (transcribefolder.toml):
 
-```transcribefolder config show```
+```bash
+transcribefolder config show
+```
 
 Run prompt to show the specified configuration file:
  
-```transcribefolder -c name of the config file.toml config show```
+```bash
+transcribefolder -c name of the config file.toml config show
+```
 
 Run prompt to transcribe all sound files in the selected folder using the default configuration file (transcribefolder.toml):
 
-```transcribefolder transcribe```
+```bash
+transcribefolder transcribe
+```
 
 Run prompt to transcribe all sound files in the selected folder using a specific configuration file:
 
-```transcribefolder -c name of the config file.toml transcribe```
+```bash
+transcribefolder -c name of the config file.toml transcribe
+```
 
 ## Known issues 
 - The deepl_translate command is not yet working. 
