@@ -36,10 +36,6 @@ from .model import (
 # can't find the 'python3' logger to silence
 
 MODEL = "large"
-# LOCALPATH = ('/Users/ncdegroot/Library/CloudStorage/'
-#              'OneDrive-Gedeeldebibliotheken-TilburgUniversity/'
-#              'Project - Reflective cafe - data')
-LOCALPATH = Path.cwd()
 model = None
 
 # ffmpeg installed on first call to add_paths(), threadsafe.
@@ -275,7 +271,7 @@ def transcribe(config, select_folder, prompt, language):
                 initialdir="~",
             )
         )
-    click.echo(f"Loading model...")
+    click.echo("Loading model...")
 
     with click_spinner.spinner(force=True):
         model = whisper.load_model(config.model)
