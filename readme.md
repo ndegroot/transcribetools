@@ -20,7 +20,7 @@ This project is licensed under the Apache 2.0 License - see the [LICENSE file](L
 ## Setup
 Before installing TranscribeTools, you need to download a package manager to install dependencies—pieces of code that the application relies on. On macOS, we will use Homebrew and uv; on Windows, we will only use uv. Then, we will install TranscribeTools.
 
-To run the following prompts, one must copy and paste the commands in the command line and press enter. During the setup, it might be necessary to restart the terminal after installing homebrew, uv, or transcribetools in order to be able to proceed. 
+To run the following prompts, one must copy and paste the commands in the command line and press the {enter} key after each line. During the setup, it might be necessary to restart the terminal after installing homebrew, uv, or transcribetools in order to be able to proceed. 
 
 ### Package manager
 #### On Windows
@@ -56,8 +56,12 @@ uv tool install transcribetools
 
 ## Command-line usage
 ### Getting started
-To get started with transcribefolder, simply follow the instructions below. The first
-time you run it, a configuration file will be created with the current folder and 
+To get started with transcribefolder, simply follow the instructions below. `cd` followed by {Enter/Return} key on selects your 
+personal storage location. 
+```bash
+cd
+```  
+The first time you run the tool, a configuration file will be created with the current folder and 
 model, which will be used from then on. If needed, you can update the configuration by 
 running the command: 
 
