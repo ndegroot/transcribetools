@@ -298,13 +298,15 @@ def transcribe(config, select_folder, prompt, language):
     start = time.perf_counter()
 
     for file in soundfiles:
-        try:
-            data, samplerate = sf.read(file)
-        except LibsndfileError:
-            duration = 0
-            click.echo('Duration unavailable, statistics incomplete.')
+        audio_ok = {".wav", ".flac", ".ogg", ".aiff", ".aif", ".aifc"}
+        if file.suffix.lower() in audio_ok:
+            try:
+                data, samplerate = sf.read(file)
+                duration += len(data) / samplerate
+            except Exception:
+                click.echo("Duration probe failed; statistics will be incomplete.")
         else:
-            duration += len(data) / samplerate
+            click.echo("Skipping duration probe for non-libsndfile format.")
         click.echo(f"Processing {file}")
         args = dict()
         if language != "AUTO":
