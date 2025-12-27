@@ -1,6 +1,6 @@
 [project]
 name = "TranscribeTools"
-version = "0.6.0"
+version = "0.6.1"
 description = "Transcribe and/ot translate all soundfiles in a folder using Whisper"
 readme = "README.md"
 requires-python = ">= 3.12, <3.14"
@@ -13,7 +13,7 @@ dependencies = [
     "rich-click>=1.8.5",
     "soundfile>=0.13.1",
     "toml>=0.10.2",
-    "transformers>=5.53.2",
+    "transformers",
     "deepl>=1.22.0",
     "keyring>=25.6.0",
     "static-ffmpeg>=2.13",

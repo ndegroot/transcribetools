@@ -294,13 +294,9 @@ def transcribe(config, select_folder, prompt, language):
     start = time.perf_counter()
 
     for file in soundfiles:
-        try:
-            data, samplerate = sf.read(file)
-        except LibsndfileError:
-            duration = 0
-            click.echo('Duration unavailable, statistics incomplete.')
-        else:
-            duration += len(data) / samplerate
+
+        duration = get_audio_duration(file)
+
         click.echo(f"Processing {file}")
         args = dict()
         if language != "AUTO":
@@ -315,6 +311,34 @@ def transcribe(config, select_folder, prompt, language):
             f"processing time: {process_time:.1f} seconds, \n"
             f"realtime factor: {(process_time / duration):.2f}"
         )
+
+
+def get_duration_old(file) -> float:
+    duration = 0
+    try:
+        data, samplerate = sf.read(file)
+    except LibsndfileError:
+        click.echo('Duration unavailable, statistics incomplete.')
+    else:
+        duration += len(data) / samplerate
+    return duration
+
+
+def get_audio_duration(file_path) -> float:
+    """Get the duration of an audio file using ffprobe"""
+    cmd = [
+        'ffprobe',
+        '-v', 'quiet',
+        '-show_entries', 'format=duration',
+        '-of', 'default=noprint_wrappers=1:nokey=1',
+        file_path
+    ]
+    try:
+        output = subprocess.check_output(cmd)
+        return float(output)
+    except Exception as e:
+        click.echo(f"Error while processing {file_path}: '{e}'. Please fix it")
+        return 0.0
 
 
 # noinspection PyShadowingNames

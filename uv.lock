@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.12, <3.14"
 
 [[package]]
@@ -1300,7 +1300,7 @@ wheels = [
 
 [[package]]
 name = "transcribetools"
-version = "0.5.9"
+version = "0.6.1"
 source = { editable = "." }
 dependencies = [
     { name = "attrs" },
@@ -1327,20 +1327,20 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "attrs", specifier = ">=24.2.0" },
+    { name = "attrs", specifier = ">=25.3.0" },
     { name = "certifi", specifier = "==2025.7.14" },
-    { name = "deepl", specifier = ">=1.21.1" },
+    { name = "deepl", specifier = ">=1.22.0" },
     { name = "docutils", specifier = "==0.22rc5" },
     { name = "keyring", specifier = ">=25.6.0" },
     { name = "openai", specifier = ">=1.59.4" },
-    { name = "openai-whisper", specifier = ">=20240930" },
+    { name = "openai-whisper", specifier = ">=20250625" },
     { name = "pymsgbox", specifier = ">=1.0.9" },
     { name = "result", specifier = ">=0.17.0" },
     { name = "rich-click", specifier = ">=1.8.5" },
-    { name = "soundfile", specifier = ">=0.13.0" },
+    { name = "soundfile", specifier = ">=0.13.1" },
     { name = "static-ffmpeg", specifier = ">=2.13" },
     { name = "toml", specifier = ">=0.10.2" },
-    { name = "transformers", specifier = ">=4.49.0" },
+    { name = "transformers" },
 ]
 
 [package.metadata.requires-dev]

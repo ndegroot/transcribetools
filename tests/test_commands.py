@@ -76,14 +76,12 @@ def test_config_show() -> None:
 
 
 # noinspection PyTypeChecker,PyUnusedLocal
-def tst_process(transcribe_setup):
+def test_process(transcribe_setup):
     runner = CliRunner()
     result = runner.invoke(cli,
                            ['--configfilename', 'tests/transcribefolder.toml', 'transcribe'])
     assert result.exit_code == 0
     assert "saved" in result.stdout
-    # u heeft nog geen invoer gegeven of de ingevoerde gegevens zijn ongeldig toets een
-    # een als u op kunt komen of een twee als u niet kunt komen
 
 
 # noinspection PyTypeChecker
