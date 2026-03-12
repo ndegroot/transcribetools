@@ -1,6 +1,7 @@
 import time
 import os
 from pathlib import Path
+import subprocess
 
 # import tkinter as tk
 from tkinter.filedialog import askdirectory
@@ -44,7 +45,7 @@ static_ffmpeg.add_paths(weak=True)  # to only add if ffmpeg/ffprobe not already 
 
 
 def process_file(path, args):
-    """open the file, transcribe it using args and save to file"""
+    """open the file, transcribe it using args, and save to file"""
     if not os.path.isfile(path):
         click.echo(f"File {path} does not exist, skipped processing")
         return
@@ -75,7 +76,7 @@ def process_file(path, args):
 
 
 def translate_it(input_path: Path, translator, args):
-    """open the file on this path, translate using args and save to file"""
+    """open the file on this path, translate using args, and save to file"""
     output_path = input_path.with_stem(
         str(input_path.stem).replace(args["source_lang"], args["target_lang"])
     )
@@ -240,6 +241,14 @@ def cli(ctx: click.Context, debug, configfilename):
     ),
 )
 @click.option(
+    "--file",
+    "-f",
+    default=None,
+    help="Transcribe a single file, supply a path",
+    metavar="FILE",
+    type=click.Path(exists=True, dir_okay=False, readable=True, resolve_path=True),
+)
+@click.option(
     "--select_folder",
     "-s",
     default=False,
@@ -253,12 +262,17 @@ def cli(ctx: click.Context, debug, configfilename):
     "https://cookbook.openai.com/examples/whisper_prompting_guide",
 )
 @click.pass_obj  # in casu the config obj
-def transcribe(config, select_folder, prompt, language):
+def transcribe(config, file, select_folder, prompt, language):
     global model
     # config = config
     if config.debug:
         click.echo(f"Load model: {config.model}")
-    soundfiles_path = Path(config.folder)
+    if file:
+        soundfile = Path(file)
+        soundfiles_path = soundfile.parent
+    else:
+        soundfile = None
+        soundfiles_path = Path(config.folder)
     if config.debug:
         click.echo(f"Folder path for soundfiles: {soundfiles_path}")
         click.echo(f"{language=}, {prompt=} ")
@@ -280,16 +294,19 @@ def transcribe(config, select_folder, prompt, language):
         ]
         file_stems = [file.stem for file in txt_files]
         # a txt file_stem indicates mp3 has been processed already (skip files with no suffix
-        soundfiles = [
-            file
-            for file in soundfiles_path.glob("*")
-            if file.suffix.lower()
-            in (".mp3", ".mp4", ".mpeg", ".mpga", ".m4a", ".wav", ".webm")
-            and file.stem not in file_stems
-        ]
+        if soundfile:
+            soundfiles = [soundfile,]
+        else:
+            soundfiles = [
+                file
+                for file in soundfiles_path.glob("*")
+                if file.suffix.lower()
+                in (".mp3", ".mp4", ".mpeg", ".mpga", ".m4a", ".wav", ".webm")
+                and file.stem not in file_stems
+            ]
     if config.debug:
         click.echo(f"{soundfiles=} in path {soundfiles_path=}")
-    click.echo(f"{len(soundfiles)} files to be processed")
+    click.echo(f"{len(soundfiles)} file(s) to be processed")
     duration = 0
     start = time.perf_counter()
 
@@ -421,7 +438,7 @@ def deeple_translate(config, select_folder, prompt, source_language, target_lang
         if f"{target_language}" in file.stem and file.suffix.lower() == ".txt"
     ]
     file_stems = [file.stem for file in translated_files]
-    # file has been processed already (skip file with no suffix
+    # file has been processed already (skips files with no suffix
     translate_file_paths = [
         file
         for file in sourcefiles_path.glob("*")

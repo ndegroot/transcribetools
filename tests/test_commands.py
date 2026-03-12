@@ -84,6 +84,19 @@ def test_process(transcribe_setup):
     assert "saved" in result.stdout
 
 
+# noinspection PyTypeChecker,PyUnusedLocal
+def test_process_single(transcribe_setup):
+    runner = CliRunner()
+    path = 'data/minimal.m4a'
+    result = runner.invoke(cli,
+                           ['--configfilename', 'tests/transcribefolder.toml', 'transcribe', '-f', path])
+    assert result.exit_code == 0
+    result_pth = path.replace(".m4a", ".txt")
+    with open(path) as f:
+        assert "Dit is een voorbeeldbestand met een paar woorden." in f.read()
+
+
+
 # noinspection PyTypeChecker
 def test_translate(translate_setup):
     runner = CliRunner()
