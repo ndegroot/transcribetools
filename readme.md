@@ -81,11 +81,12 @@ uv tool install transcribetools
 
 ## Command-line usage
 ### Getting started
-To get started with transcribefolder, follow the instructions below. `cd` followed by 
-{Enter/Return} key on selects your personal storage location. 
+To get started with transcribefolder, simply follow the instructions below. Before running transcribefolder the first time, it’s a good idea to switch to your home directory (your personal folder).
+
 ```bash
-cd
+cd ~
 ```  
+
 The first time you run the tool, a configuration file will be created with the 
 current folder and model, which will be used from then on. If needed, you can 
 update the configuration by running the command: 
@@ -125,7 +126,7 @@ transcribefolder config show
 Run prompt to show the specified configuration file:
  
 ```bash
-transcribefolder -c []name of the config file.toml] config show
+transcribefolder -c [name of the config file.toml] config show
 ```
 
 Run prompt to transcribe all sound files in the selected folder using the default 
